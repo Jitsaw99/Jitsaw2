@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Contact - Jitsaw Property Group</title><link rel="stylesheet" href="assets/css/style.css"></head><body>
+<header class="header"><div class="wrap"><a class="logo" href="index.html"><img src="assets/img/logo.png" alt="logo"><h1>Jitsaw Property Group</h1></a><nav class="nav"><a href="index.html">Home</a><a href="rentals.html">Rentals</a><a href="investments.html">Investments</a><a href="supported.html">Supported Living</a><a href="accommodation.html">Serviced Accommodation</a><a href="acquisition.html">Emergency Acquisition</a><a href="funding.html">Funding</a><a href="land.html">Land</a><a href="contact.html" class="cta">Contact</a></nav><button class="menu-toggle" aria-expanded="false">Menu</button></div></header>
+<main class="form-card"><h2 style="margin-top:0;color:var(--primary)">Get in touch</h2><p style="color:var(--muted)">Complete the form below and we'll respond promptly.</p>
+<form id="contactForm" method="POST" action="https://your-worker-name.your-subdomain.workers.dev/">
+  <div class="form-row"><label for="name">Full name</label><input id="name" name="name" type="text" required></div>
+  <div class="form-row"><label for="email">Email address</label><input id="email" name="email" type="email" required></div>
+  <div class="form-row"><label for="mobile">Mobile number</label><input id="mobile" name="mobile" type="tel" required></div>
+  <div class="form-row"><label for="urgency">Urgency</label><select id="urgency" name="urgency"><option value="immediate">Immediate</option><option value="non-urgent">Non-urgent</option></select></div>
+  <div class="form-row"><label for="interest">What are you interested in?</label><textarea id="interest" name="interest" rows="4" placeholder="E.g. Property Rentals, Funding..."></textarea></div>
+  <div style="text-align:right"><button class="btn" type="submit">Send message</button></div>
+</form>
+<div id="status" style="margin-top:1rem;color:var(--muted)"></div></main>
+<script>
+const form = document.getElementById('contactForm');
+const status = document.getElementById('status');
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  status.textContent = 'Sending...';
+  const data = new FormData(form);
+  try{
+    const res = await fetch(form.action, {method:'POST', body:data});
+    if(res.ok){ status.textContent = 'Thank you — your message has been received.'; form.reset(); }
+    else { status.textContent = 'There was an error sending your message. Please try again later.'; }
+  }catch(err){
+    status.textContent = 'Could not send message — please check the worker URL and your connection.';
+  }
+});
+</script>
+<footer class="footer"><div class="wrap">&copy; 2025 Jitsaw Property Group</div></footer>
+<script>
+const btn = document.querySelector('.menu-toggle');
+const nav = document.querySelector('.nav');
+btn?.addEventListener('click', ()=>{{ const expanded = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', String(!expanded)); if(nav.style.display === 'flex') nav.style.display = 'none'; else nav.style.display = 'flex'; }});
+</script>
+</body></html>
